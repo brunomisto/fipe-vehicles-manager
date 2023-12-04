@@ -1,8 +1,19 @@
 {% extends 'vehicles/layout.html' %}
 
 {% block body %}
+    {% if error_message %}
+        <p>
+            <strong>Error: </strong>{{error_message}}
+        </p>
+    {% endif %}
+
     <form action="{% url 'register' %}" method="post">
         {% csrf_token %}
+        <label>
+            Username:
+            <input type="text" name="username" placeholder="John" required>
+        </label>
+
         <label>
             E-mail:
             <input type="email" name="email" placeholder="john@mail.com" required>

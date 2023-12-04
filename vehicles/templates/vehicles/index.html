@@ -2,4 +2,8 @@
 
 {% block body %}
     <h1>Vehicles</h1>
+
+    {% if user.is_authenticated %}
+        <p>You're logged in as {{user}}.</p>
+    {% endif %}
 {% endblock %}
