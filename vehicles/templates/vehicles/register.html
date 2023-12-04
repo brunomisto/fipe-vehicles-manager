@@ -1,0 +1,23 @@
+{% extends 'vehicles/layout.html' %}
+
+{% block body %}
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        <label>
+            E-mail:
+            <input type="email" name="email" placeholder="john@mail.com" required>
+        </label>
+
+        <label>
+            Password:
+            <input type="password" name="password" required>
+        </label>
+
+        <label>
+            Password confirmation:
+            <input type="password" name="password-confirmation" required>
+        </label>
+
+        <input type="submit" value="Register">
+    </form>
+{% endblock %}
