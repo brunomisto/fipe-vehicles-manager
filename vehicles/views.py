@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 # Errors
 from django.db.utils import IntegrityError
@@ -66,3 +66,8 @@ def register_view(request: HttpRequest):
     
     # TODO: Give user feedback that account has been created
     return redirect("login")
+
+
+def logout_view(request: HttpRequest):
+    logout(request)
+    return redirect("index")
