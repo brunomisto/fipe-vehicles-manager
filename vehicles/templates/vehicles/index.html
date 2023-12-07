@@ -5,5 +5,29 @@
 
     {% if user.is_authenticated %}
         <p>You're logged in as {{user}}.</p>
+
+        <form>
+            <label for="vehicle-type">Vehicle type</label>
+            <select id="vehicle-type" name="vehicle-type">
+                <option selected disabled>Choose one</option>
+                <option value="cars">Cars</option>
+                <option value="motorcycles">Motorcycles</option>
+                <option value="trucks">Trucks</option>
+            </select>
+
+            <label for="brand-id">Brand</label>
+            <select id="brand-id" name="brand-id"></select>
+
+            <label for="model-id">Model</label>
+            <select id="model-id" name="model-id"></select>
+
+            <label for="year-id">Year</label>
+            <select id="year-id" name="year-id"></select>
+
+            <input id="add-vehicle" type="submit" value="Add vehicle" disabled>
+        </form>
+
+        {% load static %}
+        <script src="{% static 'vehicles/search.js' %}"></script>
     {% endif %}
 {% endblock %}
