@@ -1,0 +1,17 @@
+{% extends 'vehicles/layout.html' %}
+
+{% block body %}
+    {% if vehicle.error %}
+        <p>Vehicle not found</p>
+    {% else %}
+        <p>Price: {{vehicle.price}}</p>
+        <p>Brand: {{vehicle.brand}}</p>
+        <p>Model: {{vehicle.model}}</p>
+        <p>Model Year: {{vehicle.modelYear}}</p>
+        <p>Fuel: {{vehicle.fuel}}</p>
+        <p>Fuel Acronym: {{vehicle.fuelAcronym}}</p>
+        <p>Type: {{vehicle.vehicleType}}</p>
+        <p>FIPE Code: {{vehicle.codeFipe}}</p>
+        <p>Reference Month: {{vehicle.referenceMonth}}</p>
+    {% endif %}
+{% endblock %}

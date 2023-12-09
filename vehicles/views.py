@@ -1,11 +1,15 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
 from django.contrib.auth import authenticate, login, logout
+import requests
 
 # Errors
 from django.db.utils import IntegrityError
 
+# Models
 from .models import User
+
+api_url = "https://parallelum.com.br/fipe/api/v2"
 
 def index(request: HttpRequest):
     return render(request, "vehicles/index.html")
@@ -71,3 +75,16 @@ def register_view(request: HttpRequest):
 def logout_view(request: HttpRequest):
     logout(request)
     return redirect("index")
+
+
+def vehicle(request: HttpRequest):
+    vehicle_type = request.GET.get("vehicle-type")
+    brand_id = request.GET.get("brand-id")
+    model_id = request.GET.get("model-id")
+    year_id = request.GET.get("year-id")
+    
+    vehicle_request = requests.get(f"{api_url}/{vehicle_type}/brands/{brand_id}/models/{model_id}/years/{year_id}")
+
+    return render(request, "vehicles/vehicle.html", {
+        "vehicle": vehicle_request.json()
+    })

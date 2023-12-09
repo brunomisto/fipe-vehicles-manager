@@ -6,7 +6,7 @@
     {% if user.is_authenticated %}
         <p>You're logged in as {{user}}.</p>
 
-        <form>
+        <form method="get" action="{% url 'vehicle' %}">
             <label for="vehicle-type">Vehicle type</label>
             <select id="vehicle-type" name="vehicle-type">
                 <option selected disabled>Choose one</option>
@@ -24,7 +24,7 @@
             <label for="year-id">Year</label>
             <select id="year-id" name="year-id"></select>
 
-            <input id="add-vehicle" type="submit" value="Add vehicle" disabled>
+            <input id="add-vehicle" type="submit" value="Get vehicle" disabled>
         </form>
 
         {% load static %}
