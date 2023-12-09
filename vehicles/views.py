@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpResponse, HttpRequest, JsonResponse
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 import requests
 
 # Errors
 from django.db.utils import IntegrityError
 
 # Models
-from .models import User
+from .models import User, VehicleList, Vehicle
 
 api_url = "https://parallelum.com.br/fipe/api/v2"
 
@@ -36,7 +37,7 @@ def login_view(request: HttpRequest):
         return redirect("index")
     else:
         return render(request, "vehicles/login.html", {
-            "error_message": "Failed to login"
+            "error_message": "Credentials not found"
         })
 
 
@@ -88,3 +89,48 @@ def vehicle(request: HttpRequest):
     return render(request, "vehicles/vehicle.html", {
         "vehicle": vehicle_request.json()
     })
+
+
+@login_required
+def add_vehicle_list(request: HttpRequest, name):
+    if request.method != "PUT":
+        return JsonResponse({"error": "Expected PUT method"})
+    
+    try:
+        VehicleList.objects.get(owner=request.user, name=name)
+        return JsonResponse({"error": f"Vehicle list '{name}' already exists"})
+    except:
+        pass
+    
+    vehicle_list_object = VehicleList(owner=request.user, name=name)
+    vehicle_list_object.save()
+    return JsonResponse({"message": "Sucessfuly added new VehicleList"})
+
+
+@login_required
+def vehicle_list(request: HttpRequest, name):
+    try:
+        vehicle_list_object = VehicleList.objects.get(owner=request.user, name=name)
+    except:
+        return JsonResponse({"error": f"Vehicle list {name} not found"})
+    
+    return JsonResponse({
+        "name": vehicle_list_object.name,
+        "vehicles": [vehicle_object.serialize() for vehicle_object in vehicle_list_object.vehicles.iterator()]
+    })
+
+
+@login_required
+def vehicle_lists(request: HttpRequest):
+    user_vehicle_lists = request.user.vehicle_lists.iterator()
+
+    return JsonResponse({
+        "lists": [vehicle_list_object.name for vehicle_list_object in user_vehicle_lists]
+    })
+
+
+@login_required
+def add_vehicle(request: HttpRequest, vehicle_list):
+    vehicle_type = request.POST.get("vehicle-type")
+    fipe_code = request.POST.get("fipe-code")
+    year_id = request.POST.get("year-id")
