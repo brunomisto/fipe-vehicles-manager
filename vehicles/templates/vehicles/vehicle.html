@@ -13,5 +13,9 @@
         <p>Type: {{vehicle.vehicleType}}</p>
         <p>FIPE Code: {{vehicle.codeFipe}}</p>
         <p>Reference Month: {{vehicle.referenceMonth}}</p>
+        <p>Your lists: </p>
+        <div id="lists"></div>
+        {% load static %}
+        <script src="{% static 'vehicles/vehicle.js' %}"></script>
     {% endif %}
 {% endblock %}

@@ -8,7 +8,7 @@
 
         <form method="get" action="{% url 'vehicle' %}">
             <label for="vehicle-type">Vehicle type</label>
-            <select id="vehicle-type" name="vehicle-type">
+            <select id="vehicle-type" name="type">
                 <option selected disabled>Choose one</option>
                 <option value="cars">Cars</option>
                 <option value="motorcycles">Motorcycles</option>
@@ -16,13 +16,13 @@
             </select>
 
             <label for="brand-id">Brand</label>
-            <select id="brand-id" name="brand-id"></select>
+            <select id="brand-id" name="brand"></select>
 
             <label for="model-id">Model</label>
-            <select id="model-id" name="model-id"></select>
+            <select id="model-id" name="model"></select>
 
             <label for="year-id">Year</label>
-            <select id="year-id" name="year-id"></select>
+            <select id="year-id" name="year"></select>
 
             <input id="add-vehicle" type="submit" value="Get vehicle" disabled>
         </form>

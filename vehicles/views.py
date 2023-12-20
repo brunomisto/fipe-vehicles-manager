@@ -79,10 +79,10 @@ def logout_view(request: HttpRequest):
 
 
 def vehicle(request: HttpRequest):
-    vehicle_type = request.GET.get("vehicle-type")
-    brand_id = request.GET.get("brand-id")
-    model_id = request.GET.get("model-id")
-    year_id = request.GET.get("year-id")
+    vehicle_type = request.GET.get("type")
+    brand_id = request.GET.get("brand")
+    model_id = request.GET.get("model")
+    year_id = request.GET.get("year")
     
     vehicle_request = requests.get(f"{api_url}/{vehicle_type}/brands/{brand_id}/models/{model_id}/years/{year_id}")
 
@@ -93,8 +93,8 @@ def vehicle(request: HttpRequest):
 
 @login_required
 def add_vehicle_list(request: HttpRequest, name):
-    if request.method != "PUT":
-        return JsonResponse({"error": "Expected PUT method"})
+    if request.method != "POST":
+        return JsonResponse({"error": "Expected POST method"})
     
     try:
         VehicleList.objects.get(owner=request.user, name=name)
