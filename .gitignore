@@ -1,0 +1,4 @@
+db.sqlite3
+/vehicles/__pycache__
+/vehicles/migrations
+/fipe/__pycache__
