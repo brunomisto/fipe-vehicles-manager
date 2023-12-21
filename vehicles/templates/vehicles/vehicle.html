@@ -4,17 +4,17 @@
     {% if vehicle.error %}
         <p>Vehicle not found</p>
     {% else %}
-        <p>Price: {{vehicle.price}}</p>
-        <p>Brand: {{vehicle.brand}}</p>
-        <p>Model: {{vehicle.model}}</p>
-        <p>Model Year: {{vehicle.modelYear}}</p>
-        <p>Fuel: {{vehicle.fuel}}</p>
-        <p>Fuel Acronym: {{vehicle.fuelAcronym}}</p>
-        <p>Type: {{vehicle.vehicleType}}</p>
-        <p>FIPE Code: {{vehicle.codeFipe}}</p>
-        <p>Reference Month: {{vehicle.referenceMonth}}</p>
-        <p>Your lists: </p>
-        <div id="lists"></div>
+        <h1>{{vehicle.modelYear}} {{vehicle.brand}} {{vehicle.model}}</h1>
+        <div id="vehicle-info">
+            <p><b>Price: </b>{{vehicle.price}}</p>
+            <p><b>Fuel: </b>{{vehicle.fuel}}</p>
+            <p><b>Fuel Acronym: </b>{{vehicle.fuelAcronym}}</p>
+            <p><b>Vehicle Type: </b>{{vehicle.vehicleType}}</p>
+            <p><b>FIPE Code: </b>{{vehicle.codeFipe}}</p>
+            <p><b>Reference Month: </b>{{vehicle.referenceMonth}}</p>
+        </div>
+        <h2>Your lists: </h2>
+        <ul id="lists"></ul>
         {% load static %}
         <script src="{% static 'vehicles/vehicle.js' %}"></script>
     {% endif %}

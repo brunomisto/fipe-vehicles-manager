@@ -40,6 +40,16 @@ function updateSelect(path, currentSelect, targetSelect) {
             targetSelect.appendChild(objectElement);
         }
         currentSelect.disabled = false;
+    })
+    .catch(error => {
+        // Reset form and alert user
+        selectElements[0].disabled = false;
+        selectElements[0].childNodes[1].selected = true; // This selects the first option
+        for (let i = 1; i < selectElements.length; i++) {
+            selectElements[i].innerHTML = "";
+            selectElements[i].disabled = false;
+        }
+        alert("The system failed to fetch FIPE api data, try again.");
     });
 }
 
